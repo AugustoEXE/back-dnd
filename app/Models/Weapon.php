@@ -5,20 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Spell extends Model
+class Weapon extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'name',
-        'description',
+        'category',
         'range',
-        'casting_time',
-        'components',
-        'duration',
-        'damage',
-        'cantrip',
-        'level',
-        'school',
-        'classes'
+        'cost',
+        'damage_dice',
+        'damage_type',
+        'weight',
+        'properties',
     ];
+
 }
