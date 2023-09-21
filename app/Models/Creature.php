@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Creature extends Model
 {
@@ -28,4 +29,9 @@ class Creature extends Model
         'languages',
         'special_abilities',
     ];
+
+    public function creature_types(): BelongsToMany
+    {
+        return $this->belongsToMany(creature_type::class);
+    }
 }

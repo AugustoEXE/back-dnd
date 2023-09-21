@@ -15,9 +15,8 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name');
-            $table->string('description');
+            $table->text('description')->nullable();
             $table->string('size');
-            $table->string('type');
             $table->json('armor_class');
             $table->integer('hit_points');
             $table->string('hit_dice');

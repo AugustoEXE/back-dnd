@@ -10,7 +10,7 @@ class CreatureController extends Controller
 {
     public function index(): object
     {
-        return response()->json(Creature::all()->toArray());
+        return response()->json(Creature::with('creature_types')->get()->toArray());
     }
 
     public function store(Request $request): JsonResponse
@@ -20,8 +20,10 @@ class CreatureController extends Controller
                 ...$request->toArray(),
                 "armor_class" => json_encode($request->armor_class),
                 "proficiencies" => json_encode($request->proficiencies),
-            ]);
-            return response()->json(['status' => 'Success', 'message' => 'Raça criada com sucesso']);
+            ])->creature_types()->attach($request->types);
+
+
+            return response()->json(['status' => 'Success', 'message' => 'Criatura criada com sucesso']);
         } catch (\Throwable $err) {
             return response()->json(['status' => 'error', 'error' => (array) $err], 500);
         }
@@ -30,12 +32,19 @@ class CreatureController extends Controller
     public function update(Request $request, Creature $creature): JsonResponse
     {
         try {
-            $creature->fill([
-                ...$request->toArray(),
-                "armor_class" => json_encode($request->armor_class),
-                "proficiencies" => json_encode($request->proficiencies),
-            ])->save();
-            return response()->json(['status' => 'Success', 'message' => 'Raça alterada com sucesso']);
+            $creature
+                ->fill([
+                    ...$request->toArray(),
+                    "armor_class" => json_encode($request->armor_class),
+                    "proficiencies" => json_encode($request->proficiencies),
+                ])
+                ->save();
+
+            $creature
+                ->creature_types()
+                ->attach($request->types);
+
+            return response()->json(['status' => 'Success', 'message' => 'Criatura alterada com sucesso']);
         } catch (\Throwable $err) {
             return response()->json(['status' => 'error', 'error' => (array) $err], 500);
         }
@@ -44,8 +53,12 @@ class CreatureController extends Controller
     public function destroy(Creature $creature): object
     {
         try {
+            $creature
+                ->creature_types()
+                ->detach();
+
             $creature->delete();
-            return response()->json(['status' => 'Success', 'message' => 'Raça alterada com sucesso']);
+            return response()->json(['status' => 'Success', 'message' => 'Criatura alterada com sucesso']);
         } catch (\Throwable $err) {
             return response()->json(['status' => 'error', 'error' => (array) $err], 500);
         }
