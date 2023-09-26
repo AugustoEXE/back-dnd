@@ -6,18 +6,19 @@ use App\Models\Spell;
 use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use ReflectionClass;
 
 class SpellController extends Controller
 {
     public function index(): object
     {
-        return response()->json(Spell::all()->toArray());
+        return response()->json(Spell::with('magic_school')->get()->toArray());
     }
 
     public function store(Request $request): JsonResponse
     {
         try {
-            Spell::create($request->toArray());
+            Spell::create($request->toArray())->magic_school()->attach($request->schools);
             return response()->json(['status' => 'Success', 'message' => 'Feitiço criado com sucesso']);
         } catch (\Throwable $err) {
             return response()->json(['status'=> 'error', 'error'=> (array)$err], 500);
@@ -28,6 +29,7 @@ class SpellController extends Controller
     {
         try {
             $spell->fill($request->toArray())->save();
+            $spell->magic_school()->sync($request->schools);
             return response()->json(['status' => 'Success', 'message' => 'Feitiço alterado com sucesso']);
         } catch (\Throwable $err) {
             return response()->json(['status'=> 'error', 'error'=> (array)$err], 500);
@@ -37,6 +39,7 @@ class SpellController extends Controller
     public function destroy(Spell $spell): object
     {
         try {
+            $spell->magic_school()->detach();
             $spell->delete();
             return response()->json(['status' => 'Success', 'message' => 'Feitiço alterado com sucesso']);
         } catch (\Throwable $err) {

@@ -21,10 +21,9 @@ return new class extends Migration
             $table->string('components')->nullable();
             $table->string('duration');
             $table->string('damage');
+            $table->string('damage_type');
             $table->boolean('cantrip');
             $table->integer('level');
-            $table->string('school')->nullable();
-            $table->string('classes')->nullable();
         });
     }
 
