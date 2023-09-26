@@ -12,16 +12,20 @@ class SpellController extends Controller
 {
     public function index(): object
     {
-        return response()->json(Spell::with('magic_school')->get()->toArray());
+        return response()->json(Spell::with(['magic_school', 'class'])->get()->toArray());
     }
 
     public function store(Request $request): JsonResponse
     {
         try {
-            Spell::create($request->toArray())->magic_school()->attach($request->schools);
+
+            $spell = Spell::create($request->toArray());
+            $spell->magic_school()->attach($request->schools);
+            $spell->class()->attach($request->classes);
+
             return response()->json(['status' => 'Success', 'message' => 'Feitiço criado com sucesso']);
         } catch (\Throwable $err) {
-            return response()->json(['status'=> 'error', 'error'=> (array)$err], 500);
+            return response()->json(['status' => 'error', 'error' => (array)$err], 500);
         }
     }
 
@@ -30,9 +34,11 @@ class SpellController extends Controller
         try {
             $spell->fill($request->toArray())->save();
             $spell->magic_school()->sync($request->schools);
+            $spell->class()->sync($request->classes);
+
             return response()->json(['status' => 'Success', 'message' => 'Feitiço alterado com sucesso']);
         } catch (\Throwable $err) {
-            return response()->json(['status'=> 'error', 'error'=> (array)$err], 500);
+            return response()->json(['status' => 'error', 'error' => (array)$err], 500);
         }
     }
 
@@ -40,10 +46,12 @@ class SpellController extends Controller
     {
         try {
             $spell->magic_school()->detach();
+            $spell->class()->detach();
             $spell->delete();
+
             return response()->json(['status' => 'Success', 'message' => 'Feitiço alterado com sucesso']);
         } catch (\Throwable $err) {
-            return response()->json(['status'=> 'error', 'error'=> (array)$err], 500);
+            return response()->json(['status' => 'error', 'error' => (array)$err], 500);
         }
     }
 }

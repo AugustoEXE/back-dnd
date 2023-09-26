@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Classes extends Model
 {
@@ -14,6 +15,10 @@ class Classes extends Model
         'hit_dice',
         'proficiencies',
         'saving_throws',
-        'starting_equipment',
     ];
+
+    public function spells():BelongsToMany
+    {
+        return $this->belongsToMany(spell::class);
+    }
 }
