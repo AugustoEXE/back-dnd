@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Race extends Model
 {
@@ -19,4 +20,9 @@ class Race extends Model
         'traits',
         'subraces',
     ];
+
+    public function languages ():BelongsToMany
+    {
+        return $this->belongsToMany(Language::class);
+    }
 }

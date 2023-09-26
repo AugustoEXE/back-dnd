@@ -10,7 +10,7 @@ class RaceController extends Controller
 {
     public function index(): object
     {
-        return response()->json(Race::all()->toArray());
+        return response()->json(Race::with('languages')->get()->toArray());
     }
 
     public function store(Request $request): JsonResponse
@@ -24,7 +24,7 @@ class RaceController extends Controller
                 "traits" => json_encode($request->traits),
                 "subraces" => json_encode($request->subraces),
 
-            ]);
+            ])->languages()->attach($request->languages);
             return response()->json(['status' => 'Success', 'message' => 'Raça criada com sucesso']);
         } catch (\Throwable $err) {
             return response()->json(['status' => 'error', 'error' => (array) $err], 500);
@@ -42,6 +42,7 @@ class RaceController extends Controller
                 "traits" => json_encode($request->traits),
                 "subraces" => json_encode($request->subraces),
             ])->save();
+            $race->languages()->sync($request->languages);
             return response()->json(['status' => 'Success', 'message' => 'Raça alterada com sucesso']);
         } catch (\Throwable $err) {
             return response()->json(['status' => 'error', 'error' => (array) $err], 500);
@@ -51,6 +52,7 @@ class RaceController extends Controller
     public function destroy(Race $race): object
     {
         try {
+            $race->languages()->detach();
             $race->delete();
             return response()->json(['status' => 'Success', 'message' => 'Raça alterada com sucesso']);
         } catch (\Throwable $err) {

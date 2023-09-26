@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('races', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->text('description')->nullable();
             $table->string('name');
             $table->float('speed');
             $table->json('ability_bonuses');

@@ -21,12 +21,16 @@ class Spell extends Model
         'cantrip',
         'level',
         'school',
-        'classes'
     ];
 
     public function magic_school(): BelongsToMany
     {
         return $this->belongsToMany(magic_school::class, 'magic_school_spell', 'spell_id', 'magic_school_id');
+    }
+
+    public function class (): BelongsToMany
+    {
+        return $this->belongsToMany(classes::class,'classes_spell', 'spell_id', 'class_id');
     }
 
 }
