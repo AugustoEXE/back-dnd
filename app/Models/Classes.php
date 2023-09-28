@@ -21,4 +21,10 @@ class Classes extends Model
     {
         return $this->belongsToMany(spell::class);
     }
+
+    public function proficiencies():BelongsToMany
+    {
+        return $this->belongsToMany(Proficience::class);
+    }
+
 }

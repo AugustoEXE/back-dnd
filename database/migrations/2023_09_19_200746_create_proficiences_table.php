@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('classes', function (Blueprint $table) {
+        Schema::create('proficiences', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->string('name');
-            $table->text('description')->nullable();
-            $table->string('hit_dice');
-            $table->json('proficiencies');
-            $table->json('saving_throws');
+            $table->enum('attribute', ['STR', 'DEX', 'CON','INT', 'WIS', 'CHA']);
         });
     }
 
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('classes');
+        Schema::dropIfExists('proficiences');
     }
 };
