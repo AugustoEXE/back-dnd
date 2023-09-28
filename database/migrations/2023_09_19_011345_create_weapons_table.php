@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('range');
             $table->json('cost')->nullable();
             $table->string('damage_dice');
-            $table->string('damage_type');
+            $table->foreignId('damage_type_id')->constrained();
             $table->integer('weight');
             $table->json('properties');
 

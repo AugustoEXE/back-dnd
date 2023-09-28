@@ -12,7 +12,7 @@ class SpellController extends Controller
 {
     public function index(): object
     {
-        return response()->json(Spell::with(['magic_school', 'class'])->get()->toArray());
+        return response()->json(Spell::with(['magic_school', 'class','damageType'])->get()->toArray());
     }
 
     public function store(Request $request): JsonResponse

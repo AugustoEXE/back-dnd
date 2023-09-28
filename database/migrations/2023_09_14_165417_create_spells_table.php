@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('components')->nullable();
             $table->string('duration');
             $table->string('damage');
-            $table->string('damage_type');
+            $table->foreignId('damage_type_id')->constrained();
             $table->boolean('cantrip');
             $table->integer('level');
         });

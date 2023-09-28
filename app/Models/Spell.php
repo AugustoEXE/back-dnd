@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Spell extends Model
@@ -14,7 +15,7 @@ class Spell extends Model
         'description',
         'range',
         'casting_time',
-        'damage_type',
+        'damage_type_id',
         'components',
         'duration',
         'damage',
@@ -31,6 +32,11 @@ class Spell extends Model
     public function class (): BelongsToMany
     {
         return $this->belongsToMany(classes::class,'classes_spell', 'spell_id', 'class_id');
+    }
+
+    public function damageType(): BelongsTo
+    {
+        return $this->belongsTo(damage_type::class, 'damage_type_id');
     }
 
 }

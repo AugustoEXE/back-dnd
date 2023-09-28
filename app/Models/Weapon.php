@@ -16,7 +16,7 @@ class Weapon extends Model
         'range',
         'cost',
         'damage_dice',
-        'damage_type',
+        'damage_type_id',
         'weight',
         'properties',
     ];
@@ -24,5 +24,9 @@ class Weapon extends Model
     public function category():BelongsTo
     {
         return $this->belongsTo(WeaponCategory::class, 'category_id');
+    }
+    public function damageType(): BelongsTo
+    {
+        return $this->belongsTo(damage_type::class, 'damage_type_id');
     }
 }

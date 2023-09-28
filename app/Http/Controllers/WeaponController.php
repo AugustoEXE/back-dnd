@@ -10,7 +10,7 @@ class WeaponController extends Controller
 {
     public function index(): object
     {
-        return response()->json(Weapon::with('category')->get()->toArray());
+        return response()->json(Weapon::with('category', 'damageType')->get()->toArray());
     }
 
     public function store(Request $request): JsonResponse
