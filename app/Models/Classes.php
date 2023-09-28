@@ -27,4 +27,9 @@ class Classes extends Model
         return $this->belongsToMany(Proficience::class);
     }
 
+    public function startingEquipment():BelongsToMany
+    {
+        return $this->belongsToMany(Item::class);
+    }
+
 }

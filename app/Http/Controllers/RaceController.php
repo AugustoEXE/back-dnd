@@ -10,21 +10,22 @@ class RaceController extends Controller
 {
     public function index(): object
     {
-        return response()->json(Race::with('languages')->get()->toArray());
+        return response()->json(Race::with('languages', 'proficiencies')->get()->toArray());
     }
 
     public function store(Request $request): JsonResponse
     {
         try {
-            Race::create([
+            $race = Race::create([
                 ...$request->toArray(),
                 "ability_bonuses" => json_encode($request->ability_bonuses),
-                "starting_proficiencies" => json_encode($request->starting_proficiencies),
                 "languages" => json_encode($request->languages),
                 "traits" => json_encode($request->traits),
                 "subraces" => json_encode($request->subraces),
 
-            ])->languages()->attach($request->languages);
+            ]);
+            $race->languages()->attach($request->languages);
+            $race->proficiencies()->attach($request->starting_proficiencies);
             return response()->json(['status' => 'Success', 'message' => 'Raça criada com sucesso']);
         } catch (\Throwable $err) {
             return response()->json(['status' => 'error', 'error' => (array) $err], 500);
@@ -43,6 +44,7 @@ class RaceController extends Controller
                 "subraces" => json_encode($request->subraces),
             ])->save();
             $race->languages()->sync($request->languages);
+            $race->proficiencies()->sync($request->languages);
             return response()->json(['status' => 'Success', 'message' => 'Raça alterada com sucesso']);
         } catch (\Throwable $err) {
             return response()->json(['status' => 'error', 'error' => (array) $err], 500);
@@ -53,6 +55,7 @@ class RaceController extends Controller
     {
         try {
             $race->languages()->detach();
+            $race->proficiencies()->detach();
             $race->delete();
             return response()->json(['status' => 'Success', 'message' => 'Raça alterada com sucesso']);
         } catch (\Throwable $err) {

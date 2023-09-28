@@ -18,4 +18,9 @@ class Proficience extends Model
     {
         return $this->belongsToMany(Classes::class);
     }
+
+    public function races(): BelongsToMany
+    {
+        return $this->belongsToMany(Race::class);
+    }
 }

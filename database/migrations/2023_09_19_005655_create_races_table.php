@@ -20,7 +20,6 @@ return new class extends Migration
             $table->json('ability_bonuses');
             $table->text('alignment');
             $table->string('size');
-            $table->json('starting_proficiencies');
             $table->json('languages')->nullable();
             $table->json('traits');
             $table->json('subraces')->nullable();

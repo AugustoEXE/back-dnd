@@ -15,7 +15,6 @@ class Race extends Model
         'ability_bonuses',
         'alignment',
         'size',
-        'starting_proficiencies',
         'languages',
         'traits',
         'subraces',
@@ -25,4 +24,11 @@ class Race extends Model
     {
         return $this->belongsToMany(Language::class);
     }
+
+    public function proficiencies ():BelongsToMany
+    {
+        return $this->belongsToMany(Proficience::class);
+    }
+
+
 }
