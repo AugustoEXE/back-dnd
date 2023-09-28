@@ -42,7 +42,7 @@ class CreatureController extends Controller
 
             $creature
                 ->creature_types()
-                ->attach($request->types);
+                ->sync($request->types);
 
             return response()->json(['status' => 'Success', 'message' => 'Criatura alterada com sucesso']);
         } catch (\Throwable $err) {
