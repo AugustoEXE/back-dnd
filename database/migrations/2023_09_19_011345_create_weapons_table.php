@@ -15,13 +15,16 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name');
-            $table->string('category');
+            $table->text('description')->nullable();
+            $table->unsignedBigInteger('category_id')->index();
             $table->integer('range');
             $table->json('cost')->nullable();
             $table->string('damage_dice');
             $table->string('damage_type');
             $table->integer('weight');
             $table->json('properties');
+
+            $table->foreign('category_id')->references('id')->on('weapon_categories')->cascadeOnDelete();
 
         });
     }

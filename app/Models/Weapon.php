@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Weapon extends Model
 {
@@ -11,7 +12,7 @@ class Weapon extends Model
 
     protected $fillable = [
         'name',
-        'category',
+        'category_id',
         'range',
         'cost',
         'damage_dice',
@@ -20,4 +21,8 @@ class Weapon extends Model
         'properties',
     ];
 
+    public function category():BelongsTo
+    {
+        return $this->belongsTo(WeaponCategory::class, 'category_id');
+    }
 }
