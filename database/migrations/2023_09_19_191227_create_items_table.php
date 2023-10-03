@@ -23,6 +23,8 @@ return new class extends Migration
             $table->integer('AC');
             $table->string('property');
             $table->foreign('rarity_id')->references('id')->on('rarities')->cascadeOnDelete();
+            $table->unsignedBigInteger('creator_id')->nullable();
+
 
         });
     }

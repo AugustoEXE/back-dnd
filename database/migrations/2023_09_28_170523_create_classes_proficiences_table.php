@@ -15,6 +15,8 @@ return new class extends Migration
             $table->foreignId('proficience_id')->constrained();
             $table->foreignId('classes_id')->constrained();
             $table->primary(['proficience_id', 'classes_id']);
+            $table->unsignedBigInteger('creator_id')->nullable();
+
         });
     }
 

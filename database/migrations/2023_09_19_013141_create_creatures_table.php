@@ -31,6 +31,8 @@ return new class extends Migration
             $table->integer('passive_perception');
             $table->string('languages');
             $table->text('special_abilities');
+            $table->unsignedBigInteger('creator_id')->nullable();
+
         });
     }
 

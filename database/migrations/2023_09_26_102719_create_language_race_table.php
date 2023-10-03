@@ -15,6 +15,8 @@ return new class extends Migration
             $table->foreignId('language_id')->constrained();
             $table->foreignId('race_id')->constrained();
             $table->primary(['language_id','race_id']);
+            $table->unsignedBigInteger('creator_id')->nullable();
+
         });
     }
 

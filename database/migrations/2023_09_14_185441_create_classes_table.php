@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('hit_dice');
             $table->json('proficiencies');
             $table->json('saving_throws');
+            $table->unsignedBigInteger('creator_id')->nullable();
+
         });
     }
 

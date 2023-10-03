@@ -24,6 +24,8 @@ return new class extends Migration
             $table->foreignId('damage_type_id')->constrained();
             $table->boolean('cantrip');
             $table->integer('level');
+            $table->unsignedBigInteger('creator_id')->nullable();
+
         });
     }
 

@@ -23,6 +23,8 @@ return new class extends Migration
             $table->foreignId('damage_type_id')->constrained();
             $table->integer('weight');
             $table->json('properties');
+            $table->unsignedBigInteger('creator_id')->nullable();
+
 
             $table->foreign('category_id')->references('id')->on('weapon_categories')->cascadeOnDelete();
 

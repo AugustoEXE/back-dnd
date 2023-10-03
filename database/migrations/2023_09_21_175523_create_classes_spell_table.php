@@ -15,6 +15,8 @@ return new class extends Migration
             $table->foreignId('spell_id')->constrained();
             $table->foreignId('class_id')->constrained();
             $table->primary(['spell_id', 'class_id']);
+            $table->unsignedBigInteger('creator_id')->nullable();
+
         });
     }
 

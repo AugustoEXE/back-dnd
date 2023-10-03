@@ -15,6 +15,8 @@ return new class extends Migration
             $table->foreignId('creature_id')->constrained();
             $table->foreignId('creature_type_id')->constrained();
             $table->primary(['creature_id', 'creature_type_id']);
+            $table->unsignedBigInteger('creator_id')->nullable();
+
 
         });
     }

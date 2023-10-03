@@ -23,6 +23,8 @@ return new class extends Migration
             $table->json('languages')->nullable();
             $table->json('traits');
             $table->json('subraces')->nullable();
+            $table->unsignedBigInteger('creator_id')->nullable();
+
         });
     }
 

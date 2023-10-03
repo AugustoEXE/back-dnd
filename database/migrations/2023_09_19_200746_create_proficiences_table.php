@@ -16,6 +16,8 @@ return new class extends Migration
             $table->timestamps();
             $table->string('name');
             $table->enum('attribute', ['STR', 'DEX', 'CON','INT', 'WIS', 'CHA']);
+            $table->unsignedBigInteger('creator_id')->nullable();
+
         });
     }
 

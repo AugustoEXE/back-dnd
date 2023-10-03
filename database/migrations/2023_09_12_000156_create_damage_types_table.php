@@ -16,6 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('name');
             $table->enum('form_of_damage', ['spell','weapon']);
+            $table->unsignedBigInteger('creator_id')->nullable();
         });
     }
 
