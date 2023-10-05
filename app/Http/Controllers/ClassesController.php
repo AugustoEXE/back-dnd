@@ -21,7 +21,6 @@ class ClassesController extends Controller
                 ...$request->toArray(),
                 "proficiencies" => json_encode($request->proficiencies),
                 "saving_throws" => json_encode($request->saving_throws),
-                "starting_equipment" => json_encode($request->starting_equipment)
             ]);
             $class->proficiencies()->attach($request->proficiencies);
             $class->startingEquipment()->attach($request->starting_equipment);

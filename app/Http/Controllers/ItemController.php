@@ -42,4 +42,5 @@ class ItemController extends Controller
             return response()->json(['status' => 'error', 'error' => (array) $err], 500);
         }
     }
+    
 }
