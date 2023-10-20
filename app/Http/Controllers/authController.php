@@ -28,7 +28,7 @@ class authController extends Controller
 
         if (!$token) {
             return response()->json([
-                'message' => 'Unauthorized',
+                'message' => 'Problema com credenciais',
             ], 401);
         }
 
