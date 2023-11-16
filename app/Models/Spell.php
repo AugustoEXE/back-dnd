@@ -24,6 +24,10 @@ class Spell extends Model
         'school',
     ];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
     public function magic_school(): BelongsToMany
     {
         return $this->belongsToMany(magic_school::class, 'magic_school_spell', 'spell_id', 'magic_school_id');

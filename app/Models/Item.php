@@ -20,7 +20,10 @@ class Item extends Model
         'property',
         'rarity_id',
     ];
-
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
     public function rarities(): BelongsTo
     {
         return $this->belongsTo(Rarity::class, 'rarity_id');

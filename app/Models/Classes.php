@@ -16,7 +16,10 @@ class Classes extends Model
         'proficiencies',
         'saving_throws',
     ];
-
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
     public function spells():BelongsToMany
     {
         return $this->belongsToMany(spell::class);

@@ -12,7 +12,10 @@ class magic_school extends Model
     protected $fillable = [
         'name'
     ];
-
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
     public function spell(): BelongsToMany
     {
         return $this->belongsToMany(Spell::class, 'magic_school_spell', 'spell_id', 'magic_school_id');

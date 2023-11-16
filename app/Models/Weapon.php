@@ -20,7 +20,10 @@ class Weapon extends Model
         'weight',
         'properties',
     ];
-
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
     public function category():BelongsTo
     {
         return $this->belongsTo(WeaponCategory::class, 'category_id');

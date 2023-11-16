@@ -29,7 +29,10 @@ class Creature extends Model
         'languages',
         'special_abilities',
     ];
-
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
     public function creature_types(): BelongsToMany
     {
         return $this->belongsToMany(creature_type::class);

@@ -13,7 +13,10 @@ class Proficience extends Model
         'name',
         'attribute'
     ];
-
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
     public function classes(): BelongsToMany
     {
         return $this->belongsToMany(Classes::class);

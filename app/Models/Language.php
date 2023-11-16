@@ -12,7 +12,10 @@ class Language extends Model
     protected $fillable = [
         'name'
     ];
-
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
     public function races ():BelongsToMany
     {
         return $this->belongsToMany(Race::class);

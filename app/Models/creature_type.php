@@ -12,7 +12,10 @@ class creature_type extends Model
     protected $fillable = [
         'name'
     ];
-
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
     public function Creature(): BelongsToMany
     {
         return $this->belongsToMany(Creature::class);

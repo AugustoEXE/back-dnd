@@ -13,7 +13,10 @@ class damage_type extends Model
         'name',
         'form_of_damage'
     ];
-
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
     public function spell(): HasMany
     {
         return $this->hasMany(Spell::class, 'damage_type_id');

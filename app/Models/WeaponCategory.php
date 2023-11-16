@@ -12,7 +12,10 @@ class WeaponCategory extends Model
     protected $fillable = [
         'name'
     ];
-
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
     public function weapon():HasMany
     {
         return $this->hasMany(Weapon::class, 'category_id');

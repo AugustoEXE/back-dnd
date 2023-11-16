@@ -32,6 +32,7 @@ Route::post('login', [authController::class, 'login']);
 Route::post('create', [authController::class, 'create']);
 Route::post('refresh', [authController::class, 'refresh']);
 Route::post('logout', [authController::class, 'logout']);
+Route::post('ping', [authController::class, 'ping']);
 
 Route::prefix('spells')->middleware('auth')->group(function () {
     Route::get('', [SpellController::class, 'index']);

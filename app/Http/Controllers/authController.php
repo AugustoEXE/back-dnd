@@ -80,4 +80,9 @@ class authController extends Controller
             ]
         ]);
     }
+
+    public function ping(): JsonResponse
+    {
+        return response()->json(['message' => 'auth ok']);
+    }
 }

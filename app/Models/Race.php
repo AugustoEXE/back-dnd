@@ -19,7 +19,10 @@ class Race extends Model
         'traits',
         'subraces',
     ];
-
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
     public function languages ():BelongsToMany
     {
         return $this->belongsToMany(Language::class);
