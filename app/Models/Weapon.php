@@ -18,7 +18,8 @@ class Weapon extends Model
         'damage_dice',
         'damage_type_id',
         'weight',
-        'properties',
+        'properties'    ,
+        'description',
     ];
     protected $hidden = [
         'created_at',

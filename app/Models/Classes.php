@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Classes extends Model
 {
@@ -34,5 +35,12 @@ class Classes extends Model
     {
         return $this->belongsToMany(Item::class);
     }
+
+    public function sheets(): HasMany
+    {
+        return $this->hasMany(Sheet::class);
+    }
+
+    
 
 }

@@ -12,6 +12,7 @@ use App\Http\Controllers\MagicSchoolController;
 use App\Http\Controllers\ProficienceController;
 use App\Http\Controllers\RaceController;
 use App\Http\Controllers\RarityController;
+use App\Http\Controllers\SheetController;
 use App\Http\Controllers\SpellController;
 use App\Http\Controllers\WeaponController;
 use Illuminate\Http\Request;
@@ -33,6 +34,20 @@ Route::post('create', [authController::class, 'create']);
 Route::post('refresh', [authController::class, 'refresh']);
 Route::post('logout', [authController::class, 'logout']);
 Route::post('ping', [authController::class, 'ping']);
+
+Route::prefix('damage-types')->middleware('auth')->group(function () {
+    Route::get('', [DamageTypeController::class, 'index']);
+    Route::post('', [DamageTypeController::class, 'store']);
+    Route::put('{damage-type}', [DamageTypeController::class, 'update']);
+    Route::delete('{damage_type}', [DamageTypeController::class, 'destroy']);
+});
+
+Route::prefix('sheets')->middleware('auth')->group(function () {
+    Route::get('', [SheetController::class, 'index']);
+    Route::post('', [SheetController::class, 'store']);
+    Route::put('{Sheet}', [SheetController::class, 'update']);
+    Route::delete('{Sheet}', [SheetController::class, 'destroy']);
+});
 
 Route::prefix('spells')->middleware('auth')->group(function () {
     Route::get('', [SpellController::class, 'index']);
@@ -118,12 +133,6 @@ Route::prefix('categories')->middleware('auth')->group(function () {
     Route::delete('{WeaponCategorie}', [CategoryController::class, 'destroy']);
 });
 
-Route::prefix('damage-types')->middleware('auth')->group(function () {
-    Route::get('', [DamageTypeController::class, 'index']);
-    Route::post('', [DamageTypeController::class, 'store']);
-    Route::put('{damage-type}', [DamageTypeController::class, 'update']);
-    Route::delete('{damage-type}', [DamageTypeController::class, 'destroy']);
-});
 
 Route::prefix('proficiencies')->middleware('auth')->group(function () {
     Route::get('', [ProficienceController::class, 'index']);
